@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>激活语音转写</title>
+    <style>
+      body {
+        margin: 0;
+        width: 264px;
+        font-family:
+          system-ui,
+          -apple-system,
+          'PingFang SC',
+          'Microsoft YaHei',
+          sans-serif;
+      }
+      .card {
+        padding: 12px 14px;
+      }
+      .ok {
+        margin: 0 0 4px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #047857;
+      }
+      .desc {
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.6;
+        color: #4b5563;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <p class="ok" id="popup-activated">✓ 本页语音转写已激活</p>
+      <p class="desc" id="popup-desc">
+        面板会在 2 秒内自动继续转写，此弹窗随后自动关闭。若面板已关闭，请重新打开并再点一次「开始转写」。
+      </p>
+    </div>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

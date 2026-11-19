@@ -1,0 +1,51 @@
+{
+  "name": "kedaibiao",
+  "description": "学知云课记：跨浏览器网课学习笔记扩展（截图笔记 / 时间戳回跳 / 章节大纲 / Markdown 导出）",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "sync:public": "node scripts/sync-public.mjs",
+    "compile": "tsc --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "lint": "eslint .",
+    "postinstall": "wxt prepare"
+  },
+  "dependencies": {
+    "dexie": "^4.4.5",
+    "fflate": "^0.8.3",
+    "flexsearch": "^0.8.212",
+    "md5": "^2.3.0",
+    "mediabunny": "^1.56.2",
+    "onnxruntime-web": "^1.29.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "1.62.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/md5": "^2.3.6",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^4.1.11",
+    "@wxt-dev/module-react": "^1.1.5",
+    "eslint": "^10.9.1",
+    "fake-indexeddb": "^6.2.5",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.69.0",
+    "vitest": "^4.1.11",
+    "web-ext": "^10.5.0",
+    "wxt": "^0.21.3"
+  }
+}

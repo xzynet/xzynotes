@@ -1,0 +1,4 @@
+@import 'tailwindcss';
+
+/* 主题设置页/面板：.dark 类切换暗色（Setting.theme 驱动） */
+@custom-variant dark (&:where(.dark, .dark *));

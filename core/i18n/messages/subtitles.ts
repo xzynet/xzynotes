@@ -1,0 +1,73 @@
+/**
+ * 字幕页签（SubtitlesPanel）文案：章节大纲、字幕检索、行内编辑提示。
+ * 错误展示统一走 localizeError(t, err)，core 抛出的 key 不在此分片。
+ */
+export const zh = {
+  'subtitles.loading': '字幕加载中…',
+  'subtitles.noSubtitles': '该视频暂无字幕',
+  'subtitles.noSubtitlesHint':
+    '字幕时间轴与检索不可用；截图与文字笔记不受影响。部分平台需登录并开启字幕后才能获取。',
+  'subtitles.searchPlaceholder': '搜索字幕全文，点击结果跳转…',
+  'subtitles.locateCurrent': '定位当前',
+  'subtitles.fromTranscriptHint': '字幕来自本地语音转写 · 点行尾 ✎ 可修改文本',
+  'subtitles.retranscribe': '重新转写',
+  'subtitles.editText': '编辑文本',
+  'subtitles.editSaveFailed': '编辑未能保存：{message}',
+  'subtitles.chapterOutline': '章节大纲',
+  'subtitles.chapterCount': '共 {count} 章',
+  'subtitles.chaptersLoading': '章节加载中…',
+  'subtitles.noChaptersHint': '尚未生成章节，点击右上角「AI 生成」或「规则生成」',
+  'subtitles.chaptersGenerated': '已生成 {count} 个章节',
+  'subtitles.generateFailed': '章节生成失败',
+  'subtitles.generating': '生成中…',
+  'subtitles.ruleGenerate': '规则生成',
+  'subtitles.aiGenerate': 'AI 生成',
+  'subtitles.aiGenerating': 'AI 生成中…',
+  'subtitles.regenerate': '重新生成',
+  'subtitles.aiChaptersGenerated': 'AI 已生成 {count} 个章节',
+  'subtitles.aiGenerateFailed': 'AI 章节生成失败',
+  'subtitles.configLlmFirst': '请先在设置页配置 AI 大模型',
+  'subtitles.openSettings': '打开设置',
+  'subtitles.courseOverview': '课程概述',
+  'subtitles.jumpToChapterStart': '跳转到本章起点',
+  'subtitles.collapse': '收起 ▴',
+  'subtitles.expandCues': '字幕 ▾',
+  'subtitles.noCuesInChapter': '（本章无字幕）',
+  'subtitles.noMatch': '没有匹配的字幕',
+} as const;
+
+export const en: Record<keyof typeof zh, string> = {
+  'subtitles.loading': 'Loading subtitles…',
+  'subtitles.noSubtitles': 'No subtitles available for this video',
+  'subtitles.noSubtitlesHint':
+    'The subtitle timeline and search are unavailable; screenshots and text notes are unaffected. Some platforms require signing in and enabling subtitles before they can be fetched.',
+  'subtitles.searchPlaceholder': 'Search subtitles, click a result to jump…',
+  'subtitles.locateCurrent': 'Locate current',
+  'subtitles.fromTranscriptHint':
+    'Subtitles from local speech transcription · click ✎ at the end of a line to edit',
+  'subtitles.retranscribe': 'Transcribe again',
+  'subtitles.editText': 'Edit text',
+  'subtitles.editSaveFailed': 'Edit was not saved: {message}',
+  'subtitles.chapterOutline': 'Chapter Outline',
+  'subtitles.chapterCount': '{count} chapters',
+  'subtitles.chaptersLoading': 'Loading chapters…',
+  'subtitles.noChaptersHint':
+    'No chapters yet. Click "AI Generate" or "Rule-based" in the top right',
+  'subtitles.chaptersGenerated': 'Generated {count} chapters',
+  'subtitles.generateFailed': 'Failed to generate chapters',
+  'subtitles.generating': 'Generating…',
+  'subtitles.ruleGenerate': 'Rule-based',
+  'subtitles.aiGenerate': 'AI Generate',
+  'subtitles.aiGenerating': 'AI generating…',
+  'subtitles.regenerate': 'Regenerate',
+  'subtitles.aiChaptersGenerated': 'AI generated {count} chapters',
+  'subtitles.aiGenerateFailed': 'AI chapter generation failed',
+  'subtitles.configLlmFirst': 'Configure the AI model on the settings page first',
+  'subtitles.openSettings': 'Open settings',
+  'subtitles.courseOverview': 'Course Overview',
+  'subtitles.jumpToChapterStart': 'Jump to the start of this chapter',
+  'subtitles.collapse': 'Collapse ▴',
+  'subtitles.expandCues': 'Subtitles ▾',
+  'subtitles.noCuesInChapter': '(No subtitles in this chapter)',
+  'subtitles.noMatch': 'No matching subtitles',
+};

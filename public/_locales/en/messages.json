@@ -1,0 +1,34 @@
+{
+  "extensionName": {
+    "message": "XZY Notes",
+    "description": "Extension name shown in the browser UI"
+  },
+  "extensionDescription": {
+    "message": "Lecture notes for online courses: screenshots, timestamp jump-back, subtitle search, offline transcription, Markdown export.",
+    "description": "Extension description shown in the browser UI"
+  },
+  "commandCapture": {
+    "message": "Capture screenshot note (grab current video frame)",
+    "description": "Shortcut command description"
+  },
+  "commandCaptureAnnotate": {
+    "message": "Capture screenshot and annotate",
+    "description": "Shortcut command description"
+  },
+  "commandNewNote": {
+    "message": "New text note at current playback position",
+    "description": "Shortcut command description"
+  },
+  "commandTogglePanel": {
+    "message": "Open XZY Notes panel",
+    "description": "Shortcut command description"
+  },
+  "commandActivateAsr": {
+    "message": "Activate on-page transcription and open panel",
+    "description": "Shortcut command description"
+  },
+  "commandBookmark": {
+    "message": "Bookmark current playback position",
+    "description": "Shortcut command description"
+  }
+}
