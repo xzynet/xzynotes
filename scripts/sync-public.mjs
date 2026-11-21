@@ -3,6 +3,7 @@
  * 按根目录 .publicignore 将公开文件同步到 ../wmkedaibiao-public。
  * 用法：node scripts/sync-public.mjs [--dry-run]
  */
+import { isUtf8 } from 'node:buffer';
 import { copyFile, lstat, mkdir, readFile, readdir, rm } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 
@@ -24,6 +25,33 @@ const PROTECTED_TARGET_ROOT = new Set([
 
 if (process.argv.slice(2).some((arg) => arg !== '--dry-run')) {
   throw new Error('仅支持可选参数 --dry-run');
+}
+
+function isComparableText(content) {
+  return !content.subarray(0, 8000).includes(0) && isUtf8(content);
+}
+
+function normalizeLineEndings(content) {
+  return content.toString('utf8').replace(/\r\n?/g, '\n');
+}
+
+async function hasSameContent(sourcePath, targetPath) {
+  let targetStats;
+  try {
+    targetStats = await lstat(targetPath);
+  } catch (error) {
+    if (error.code === 'ENOENT') return false;
+    throw error;
+  }
+  if (!targetStats.isFile()) return false;
+
+  const [sourceContent, targetContent] = await Promise.all([
+    readFile(sourcePath),
+    readFile(targetPath),
+  ]);
+  if (sourceContent.equals(targetContent)) return true;
+  if (!isComparableText(sourceContent) || !isComparableText(targetContent)) return false;
+  return normalizeLineEndings(sourceContent) === normalizeLineEndings(targetContent);
 }
 
 function globToRegExp(pattern) {
@@ -138,7 +166,7 @@ async function main() {
 
   if (!DRY_RUN) await mkdir(TARGET_ROOT, { recursive: true });
   const fileSet = new Set(sourceFiles);
-  const counters = { removed: 0 };
+  const counters = { removed: 0, copied: 0, unchanged: 0 };
   await removeStale('', fileSet, sourceDirectories, counters);
 
   if (!DRY_RUN) {
@@ -148,15 +176,25 @@ async function main() {
     for (const directory of directoriesByDepth) {
       await mkdir(join(TARGET_ROOT, directory), { recursive: true });
     }
-    for (const file of sourceFiles) {
-      await copyFile(join(SOURCE_ROOT, file), join(TARGET_ROOT, file));
+  }
+  for (const file of sourceFiles) {
+    const sourcePath = join(SOURCE_ROOT, file);
+    const targetPath = join(TARGET_ROOT, file);
+    if (await hasSameContent(sourcePath, targetPath)) {
+      counters.unchanged += 1;
+      continue;
     }
+    if (!DRY_RUN) await copyFile(sourcePath, targetPath);
+    counters.copied += 1;
   }
 
   if (skipped.length > 0) {
     console.log(`跳过 ${skipped.length} 个符号链接或特殊文件：${skipped.join(', ')}`);
   }
-  console.log(`${DRY_RUN ? '预览' : '同步'}完成；清理过期路径 ${counters.removed} 个。`);
+  console.log(
+    `${DRY_RUN ? '预览' : '同步'}完成；${DRY_RUN ? '待复制' : '复制'} ${counters.copied} 个，`
+      + `跳过相同文件 ${counters.unchanged} 个，清理过期路径 ${counters.removed} 个。`,
+  );
 }
 
 await main();
