@@ -23,13 +23,16 @@
 
 ### 支持平台
 
-| 平台                       | 状态                                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------------- |
-| B站（bilibili.com）         | ✅ 完整支持（CC 字幕经 WBI 签名接口、弹幕密度、`?t=` 回跳）                                                 |
-| 中国大学MOOC（icourse163.org） | ✅ 支持（AI 字幕经响应拦截 + SRT 全量，UTF-16 兼容）                                                   |
-| 学堂在线（xuetangx.com）       | ✅ 支持（同 MOOC 策略，待回归）                                                                   |
-| 智慧树（zhihuishu.com）       | ✅ 支持（无注入模式：不 hook 页面、不挂悬浮按钮，规避反作弊检测；字幕走 textTrack/资源表扫描，待回归）                          |
-| 任意 HTML5 `<video>` 页面    | ✅ 通用模式（点击工具栏图标激活后注入脚本：语音转写/截图/笔记/回跳可用，无平台字幕与章节；MSE/HLS 页在 Chrome 走实时捕获，Firefox 无捕获能力） |
+| 平台 | 状态 |
+| --- | --- |
+| B站（bilibili.com） | ✅ 支持视频页（CC 字幕、弹幕密度、时间戳回跳） |
+| 中国大学MOOC（icourse163.org） | ✅ 支持（页面提供的 AI 字幕与 SRT 字幕时间轴，兼容 UTF-16） |
+| 学堂在线（xuetangx.com） | ⚠️ 已适配，待回归验证（字幕时间轴与检索） |
+| 智慧树（zhihuishu.com） | ⚠️ 已适配，待回归验证（不注入 MAIN world、不 hook 页面 `fetch`/XHR、不挂悬浮按钮；字幕经 textTrack/资源扫描读取） |
+| YouTube（youtube.com） | ✅ 支持 watch 页（CC 字幕、时间戳回跳） |
+| 一般 HTML5 `<video>` 页面 | ✅ 通用模式（点击工具栏图标按需激活；支持截图、笔记、回跳及可用的本地转写，实际能力取决于页面与媒体格式；MSE/HLS 页面在 Chrome 可使用实时音频转写，Firefox 不支持标签页音频捕获） |
+
+> 功能可用性取决于页面实际提供的字幕、媒体格式及平台当前版本；平台改版可能影响兼容性。
 
 ## 安装
 
@@ -51,7 +54,7 @@ pnpm install 安装依赖
 
 ## 使用
 
-在支持的平台打开视频页，点击工具栏图标或页面右下角「学知云课记」悬浮按钮打开侧栏。任意 HTML5 视频页也可使用：点击工具栏图标即完成激活（同时授权页面脚本注入与语音转写捕获），面板自动进入通用模式。
+在支持的平台打开视频页，点击工具栏图标或页面右下角「学知云课记」悬浮按钮打开侧栏。一般 HTML5 视频页也可使用通用模式：点击工具栏图标完成激活（同时授权页面脚本注入与语音转写捕获），面板自动进入通用模式。
 
 | 快捷键     | 功能           |
 | ------- | ------------ |
@@ -62,6 +65,12 @@ pnpm install 安装依赖
 | `Alt+B` | 收藏当前时间点      |
 
 快捷键可在 `chrome://extensions/shortcuts` 自定义（Chrome 不允许扩展内编程修改）。
+
+## 使用边界
+
+本项目仅限用于用户有权访问的课程和个人学习。不得用于绕过登录、付费、DRM 等访问或版权保护措施，不得用于考试作弊或批量抓取。
+
+导出或分享笔记、截图、字幕及转写内容时，请遵守适用的平台协议与法律，并尊重内容权利人的权益。本项目不授予用户对课程内容或平台接口的任何额外权利。
 
 ## 开发
 
@@ -204,11 +213,26 @@ Explore more courses and AI-powered learning tools on the [XZY website](https://
 
 ### Platforms
 
-Bilibili (full, WBI-signed CC subtitle API) · icourse163 MOOC (response interception + SRT) · XueTangX · Zhihuishu (injection-free, anti-detection) · generic HTML5 `<video>` fallback.
+| Platform | Status |
+| --- | --- |
+| Bilibili (bilibili.com) | ✅ Supported on video pages (CC subtitles, danmaku density, timestamp jump-back) |
+| icourse163 MOOC (icourse163.org) | ✅ Supported (timeline for page-provided AI and SRT subtitles; UTF-16 compatible) |
+| XueTangX (xuetangx.com) | ⚠️ Adapted; regression verification pending (subtitle timeline and search) |
+| Zhihuishu (zhihuishu.com) | ⚠️ Adapted; regression verification pending (no MAIN-world injection, page `fetch`/XHR hooks, or floating button; subtitles via textTracks and resource discovery) |
+| YouTube (youtube.com) | ✅ Supported on watch pages (CC subtitles and timestamp jump-back) |
+| Standard HTML5 `<video>` pages | ✅ Generic mode (activated on demand from the toolbar; screenshots, notes, jump-back, and local transcription where available; actual capabilities depend on the page and media format. Chrome supports live audio transcription on MSE/HLS pages; Firefox does not support tab audio capture) |
+
+> Availability depends on the subtitles and media formats provided by the page and the current platform version. Platform updates may affect compatibility.
 
 ## Install
 
 `pnpm build` → load `.output/chrome-mv3` at `chrome://extensions` (Developer mode → Load unpacked). Firefox: `pnpm build:firefox` → `about:debugging` → load temporary add-on.
+
+## Acceptable Use
+
+This project is intended only for personal study of courses that users are authorized to access. Do not use it to bypass login, paywall, DRM, or other access or copyright-protection controls; to cheat in assessments; or to scrape content in bulk.
+
+When exporting or sharing notes, screenshots, subtitles, or transcripts, comply with applicable platform terms and laws and respect content rightsholders. This project does not grant users any additional rights to course content or platform APIs.
 
 ## Develop
 
