@@ -33,16 +33,26 @@
 
 ## 安装
 
-### Chrome / Edge
+### 浏览器商店安装（推荐，无需源码）
 
-pnpm install 安装依赖
+[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-安装-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/xzy-notes/cddgcjiapaahlnaameonmikdcbogabfp?hl=zh-CN)
+[![Firefox Add-ons](https://img.shields.io/badge/Firefox_Add--ons-安装-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/zh-CN/firefox/addon/xzy-notes/)
 
-1. 下载或构建产物：`pnpm build` → `.output/chrome-mv3/`
-2. 打开 `chrome://extensions` → 开启「开发者模式」→「加载已解压的扩展程序」→ 选择 `.output/chrome-mv3`
+- **Chrome / Edge**：点击上方的 Chrome Web Store 徽章，在商店页面安装。
+- **Firefox**：点击上方的 Firefox Add-ons 徽章，在商店页面安装。
 
-### Firefox
+也可以直接在 Chrome 应用商店或 Firefox 附加组件商店搜索「学知云课记」或「XZY Notes」。
 
-`pnpm build:firefox` → `.output/firefox-mv3/`；`about:debugging` →「临时载入附加组件」→ 选择其中的 `manifest.json`。
+### 从源码安装
+
+#### Chrome / Edge
+
+1. 运行 `pnpm install` 安装依赖，再运行 `pnpm build` 构建产物到 `.output/chrome-mv3/`。
+2. 打开 `chrome://extensions` → 开启「开发者模式」→「加载已解压的扩展程序」→ 选择 `.output/chrome-mv3`。
+
+#### Firefox
+
+运行 `pnpm install` 和 `pnpm build:firefox`，然后打开 `about:debugging` →「临时载入附加组件」→ 选择 `.output/firefox-mv3/` 中的 `manifest.json`。
 
 ### 国产浏览器手动侧载
 
@@ -208,7 +218,16 @@ Bilibili (full, WBI-signed CC subtitle API) · icourse163 MOOC (response interce
 
 ## Install
 
-`pnpm build` → load `.output/chrome-mv3` at `chrome://extensions` (Developer mode → Load unpacked). Firefox: `pnpm build:firefox` → `about:debugging` → load temporary add-on.
+### Browser stores (recommended, no source code required)
+
+[![Chrome Web Store](https://img.shields.io/badge/Chrome_Web_Store-Install-4285F4?logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/xzy-notes/cddgcjiapaahlnaameonmikdcbogabfp)
+[![Firefox Add-ons](https://img.shields.io/badge/Firefox_Add--ons-Install-FF7139?logo=firefoxbrowser&logoColor=white)](https://addons.mozilla.org/firefox/addon/xzy-notes/)
+
+Click a badge above to install XZY Notes on Chrome / Edge or Firefox. You can also search for “XZY Notes” or “学知云课记” in the Chrome Web Store or Firefox Add-ons store.
+
+### Build from source
+
+Run `pnpm install` first. For Chrome / Edge, run `pnpm build`, then load `.output/chrome-mv3` at `chrome://extensions` (Developer mode → Load unpacked). For Firefox, run `pnpm build:firefox`, then open `about:debugging` and load `.output/firefox-mv3/manifest.json` as a temporary add-on.
 
 ## Develop
 
